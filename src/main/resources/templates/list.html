@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <h2>User List</h2>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Adress</th>
+
+        </tr>
+        <tbody>
+            <tr th:each="user:${pageInfo.list}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.address}"></td>
+
+            </tr>
+        </tbody>
+    </table>
+
+
+    <p>当前 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span th:text="${pageInfo.pages}"></span> 页,共 <span th:text="${pageInfo.total}"></span> 条记录</p>
+    <a th:href="@{/user(pageNo=1)}">首页</a>
+    <a th:href="@{/user(pageNo=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a>
+    <a th:href="@{/user(pageNo=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a>
+    <a th:href="@{/user(pageNo=${pageInfo.pages})}">尾页</a>
+
+</body>
+</html>
